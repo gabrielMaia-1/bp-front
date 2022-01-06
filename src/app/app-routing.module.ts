@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from './modules/pages/home/home.component';
 
 const routes: Routes = [
-  {path: '', component: HomeComponent}
+  {path: 'cadastro', loadChildren: () => import('./modules/cadastro/cadastro.module').then(m => m.CadastroModule)},
+  {path: '**', pathMatch: 'full', redirectTo: 'home'}
 ];
 
 @NgModule({

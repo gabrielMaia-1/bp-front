@@ -14,7 +14,8 @@ import { MaterialModule } from './material/material.module';
     MaterialModule
   ],
   exports:[
-    MainNavComponent
-  ]
+    MainNavComponent,
+    MaterialModule
+  ] 
 })
 export class SharedModule { }
