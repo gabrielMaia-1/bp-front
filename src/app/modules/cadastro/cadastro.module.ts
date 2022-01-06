@@ -7,6 +7,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { CadastroPostoComponent } from './posto/posto.component';
 import { CadastroCombustivelComponent } from './combustivel/cadastro-combustivel.component';
 import { CombustivelModalComponent } from './combustivel/combustivel-modal/combustivel-modal.component';
+import { PostoModalComponent } from './posto/posto-modal/posto-modal.component';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { CombustivelModalComponent } from './combustivel/combustivel-modal/combu
     CadastroComponent,
     CadastroPostoComponent,
     CadastroCombustivelComponent,
-    CombustivelModalComponent
+    CombustivelModalComponent,
+    PostoModalComponent
   ],
   imports: [
     CommonModule,

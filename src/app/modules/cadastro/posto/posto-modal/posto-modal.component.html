@@ -1,0 +1,29 @@
+<h2 mat-dialog-title>Editar Posto</h2>
+<mat-dialog-content>
+    <form #f="ngForm">
+        <div class="row">
+            <div class="col-md-2">
+                <mat-form-field appearance="fill" class="w-100">
+                    <mat-label>Id.</mat-label>
+                    <input matInput disabled [value]="data.id">
+                </mat-form-field>
+            </div>
+            <div class="col">
+                <mat-form-field appearance="fill" class="w-100">
+                    <mat-label>Nome</mat-label>
+                    <input matInput [value]="data.nome">
+                </mat-form-field>
+            </div>
+            <div class="col-md-3">
+                <mat-form-field appearance="fill" class="w-100">
+                    <mat-label>Localizacao</mat-label>
+                    <input matInput disabled value="[{{data.lat}},{{data.lon}}]">
+                </mat-form-field>
+            </div>
+        </div>
+    </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-flat-button color="primary" [mat-dialog-close]="true">Salvar</button>
+    <button mat-flat-button [mat-dialog-close]="false">Cancelar</button>
+</mat-dialog-actions>

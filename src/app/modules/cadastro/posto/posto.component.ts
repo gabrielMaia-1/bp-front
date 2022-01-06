@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { ModalConfirmacaoComponent } from 'src/app/shared/components/modal-confirmacao/modal-confirmacao.component';
+import { PostoModalComponent } from './posto-modal/posto-modal.component';
 
 export interface Posto {
   id: number;
@@ -20,9 +23,23 @@ export class CadastroPostoComponent implements OnInit {
     {id: 1, nome: 'santa gasoza', lat: 12.0, lon: -123.423}
   ];
 
-  constructor() { }
+  constructor(public _dialog: MatDialog) { }
 
   ngOnInit(): void {
   }
 
+  editar(posto: Posto) {
+    this._dialog.open(PostoModalComponent, {
+      data: posto
+    })
+  }
+
+  remover(id: number) {
+    this._dialog.open(ModalConfirmacaoComponent, {
+      data: {
+        titulo: 'Atenção!',
+        mensagem: 'Voce tem certeza que deseja Excluir este registro'
+      }
+    })
+  }
 }
