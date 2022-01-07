@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { MainNavComponent } from './components/main-nav/main-nav.component';
 import { MaterialModule } from './material/material.module';
 import { ModalConfirmacaoComponent } from './components/modal-confirmacao/modal-confirmacao.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -20,7 +20,8 @@ import { FormsModule } from '@angular/forms';
   exports:[
     MainNavComponent,
     MaterialModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ] 
 })
 export class SharedModule { }

@@ -8,6 +8,8 @@ import { CadastroPostoComponent } from './posto/posto.component';
 import { CadastroCombustivelComponent } from './combustivel/cadastro-combustivel.component';
 import { CombustivelModalComponent } from './combustivel/combustivel-modal/combustivel-modal.component';
 import { PostoModalComponent } from './posto/posto-modal/posto-modal.component';
+import { PostoDetalhesComponent } from './posto/posto-detalhes/posto-detalhes.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -16,12 +18,14 @@ import { PostoModalComponent } from './posto/posto-modal/posto-modal.component';
     CadastroPostoComponent,
     CadastroCombustivelComponent,
     CombustivelModalComponent,
-    PostoModalComponent
+    PostoModalComponent,
+    PostoDetalhesComponent
   ],
   imports: [
     CommonModule,
     CadastroRoutingModule,
-    SharedModule
+    SharedModule,
+    
   ]
 })
 export class CadastroModule { }
