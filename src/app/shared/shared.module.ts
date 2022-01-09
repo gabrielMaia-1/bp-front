@@ -4,6 +4,8 @@ import { MainNavComponent } from './components/main-nav/main-nav.component';
 import { MaterialModule } from './material/material.module';
 import { ModalConfirmacaoComponent } from './components/modal-confirmacao/modal-confirmacao.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+
 
 
 
@@ -14,6 +16,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   ],
   imports: [
     CommonModule,
+    RouterModule,
     MaterialModule,
     FormsModule
   ],

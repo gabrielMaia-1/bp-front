@@ -9,7 +9,8 @@ import { CadastroCombustivelComponent } from './combustivel/cadastro-combustivel
 import { CombustivelModalComponent } from './combustivel/combustivel-modal/combustivel-modal.component';
 import { PostoModalComponent } from './posto/posto-modal/posto-modal.component';
 import { PostoDetalhesComponent } from './posto/posto-detalhes/posto-detalhes.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { TipoCombustivelComponent } from './tipo-combustivel/tipo-combustivel.component';
+import { TipoCombustivelModalComponent } from './tipo-combustivel/tipo-combustivel-modal/tipo-combustivel-modal.component';
 
 
 @NgModule({
@@ -19,7 +20,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     CadastroCombustivelComponent,
     CombustivelModalComponent,
     PostoModalComponent,
-    PostoDetalhesComponent
+    PostoDetalhesComponent,
+    TipoCombustivelComponent,
+    TipoCombustivelModalComponent,
   ],
   imports: [
     CommonModule,

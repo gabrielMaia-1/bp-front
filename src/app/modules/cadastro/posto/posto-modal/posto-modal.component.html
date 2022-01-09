@@ -15,8 +15,8 @@
                         <mat-form-field appearance="fill" class="w-100">
                             <mat-label>Nome</mat-label>
                             <input matInput formControlName="nome">
-                            <mat-error *ngIf="postoForm.controls['nome'].hasError('required')">
-                                Nome é obrigatório.
+                            <mat-error *ngIf="postoForm.controls['nome'].hasError('maxlenght')">
+                                Nome Não pode conter mais que 96 caracteres
                             </mat-error>
                         </mat-form-field>
                     </div>
@@ -25,13 +25,13 @@
                     <div class="col">
                         <mat-form-field appearance="fill" class="w-100">
                             <mat-label>Lat.</mat-label>
-                            <input matInput formControlName="lat">
+                            <input matInput formControlName="latitude">
                         </mat-form-field>
                     </div>
                     <div class="col">
                         <mat-form-field appearance="fill" class="w-100">
                             <mat-label>Longi.</mat-label>
-                            <input matInput formControlName="lng">
+                            <input matInput formControlName="longitude">
                         </mat-form-field>
                     </div>
                 </div>

@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Posto } from '../posto.component';
+import { Posto } from 'src/app/shared/interfaces/Posto';
 declare let L : any;
 
 

@@ -6,7 +6,7 @@
   </div>
   <div class="row">
     <div class="col">
-      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 w-100">
+      <table mat-table [dataSource]=" postos" class="mat-elevation-z8 w-100">
     
         <!-- Id -->
         <ng-container matColumnDef="id">
@@ -23,7 +23,7 @@
         <!-- loc -->
         <ng-container matColumnDef="localizacao">
           <th mat-header-cell *matHeaderCellDef> Localizacao </th>
-          <td mat-cell *matCellDef="let element"> [{{element.lat}}, {{element.lng}}] </td>
+          <td mat-cell *matCellDef="let element"> Lat: {{element.latitude}}<br /> Lng: {{element.longitude}}</td>
         </ng-container>
       
         <!-- Action -->
@@ -33,7 +33,7 @@
             <button mat-icon-button (click)="editar(element)">
               <mat-icon>edit</mat-icon>
             </button>
-            <button mat-icon-button (click)="remover(element.id)">
+            <button mat-icon-button (click)="remover(element)">
               <mat-icon>delete</mat-icon>
             </button>
             <button mat-icon-button (click)="detalhes(element)">

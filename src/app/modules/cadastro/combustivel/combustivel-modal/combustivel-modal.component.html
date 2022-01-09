@@ -1,35 +1,42 @@
-<h2 mat-dialog-title>Editar Combustivel</h2>
+<h2 mat-dialog-title>Combustivel</h2>
 <mat-dialog-content>
     <form #f="ngForm">
         <div class="row">
             <div class="col-md-2">
                 <mat-form-field appearance="fill" class="w-100">
                     <mat-label>Id.</mat-label>
-                    <input matInput disabled [value]="data.id">
+                    <input matInput disabled [value]="data.id" name="id" ngModel>
                 </mat-form-field>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-4">
                 <mat-form-field appearance="fill" class="w-100">
-                    <mat-label>Id. Posto</mat-label>
-                    <input matInput [value]="data.idPosto">
+                    <mat-label>Posto</mat-label>
+                    <mat-select required name="posto" ngModel [value]="data.id">
+                        <mat-option *ngFor="let posto of postos | async" [value]="posto">{{posto.nome}}</mat-option>
+                    </mat-select>
                 </mat-form-field>
             </div>
-            <div class="col">
+            <div class="col-md-4">
                 <mat-form-field appearance="fill" class="w-100">
-                    <mat-label>Nome</mat-label>
-                    <input matInput [value]="data.nome">
+                    <mat-label>Tipo Combustivel</mat-label>
+                    <mat-select required name="tipo" ngModel>
+                        <mat-option *ngFor="let tipo of tipos | async" [value]="tipo">{{tipo.nome}}</mat-option>
+                    </mat-select>
                 </mat-form-field>
             </div>
-            <div class="col-lg-2">
+            <div class="col-md-2">
                 <mat-form-field appearance="fill" class="w-100">
                     <mat-label>Preço / Litro</mat-label>
-                    <input matInput type="number" [value]="data.preco">
+                    <input matInput type="number" [value]="data.preco" name="preco" ngModel required min="0">
+                    <mat-error *ngIf="f.form.controls['preco']?.hasError('min')">
+                        Preço do combustivel não pode ser negativo
+                    </mat-error>
                 </mat-form-field>
             </div>
         </div>
     </form>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-    <button mat-flat-button color="primary" (click)="salvar(f.form.value)">Salvar</button>
+    <button mat-flat-button color="primary" (click)="salvar(f.form)">Salvar</button>
     <button mat-flat-button [mat-dialog-close]="false">Cancelar</button>
 </mat-dialog-actions>

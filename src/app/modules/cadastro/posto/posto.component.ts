@@ -1,17 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatTable } from '@angular/material/table';
+import { ApiService } from 'src/app/core/api.service';
 import { ModalConfirmacaoComponent } from 'src/app/shared/components/modal-confirmacao/modal-confirmacao.component';
 import { MODAL_LG, MODAL_MD } from 'src/app/shared/consts';
 import { PostoDetalhesComponent } from './posto-detalhes/posto-detalhes.component';
 import { PostoModalComponent } from './posto-modal/posto-modal.component';
-
-export interface Posto {
-  id: number | null;
-  nome: string | null;
-  lat: number;
-  lng: number;
-}
-
+import { Posto } from 'src/app/shared/interfaces/Posto'
 
 @Component({
   selector: 'bp-cad-posto',
@@ -19,30 +14,52 @@ export interface Posto {
   styleUrls: ['./posto.component.scss']
 })
 export class CadastroPostoComponent implements OnInit {
-
+  @ViewChild(MatTable) matTable!: MatTable<Posto>;
   displayedColumns: string[] = ['id', 'nome', 'localizacao', 'action']
-  dataSource: Posto[] = [
-    {id: 1, nome: 'santa gasoza', lat: -20.464412, lng: -54.618908}
-  ];
+  postos: Posto[] = []
   
-  constructor(public _dialog: MatDialog) { }
+  constructor(public _dialog: MatDialog,
+              public _api: ApiService) { }
 
   ngOnInit(): void {
-  }
-
-  editar(posto: Posto) {
-    this._dialog.open(PostoModalComponent, {
-      data: posto,
-      ...MODAL_LG
+    this._api.get<Posto[]>('posto').subscribe(res => {
+      this.postos = res;
     })
   }
 
-  remover(id: number) {
-    this._dialog.open(ModalConfirmacaoComponent, {
+  editar(posto: Posto) {
+    this._dialog.open<PostoModalComponent, Posto, Posto>(PostoModalComponent, {
+      data: posto,
+      ...MODAL_LG
+    }).afterClosed()
+    .subscribe(res => {
+      if(!res) return;
+      posto.nome = res.nome
+      posto.id = res.id
+      posto.latitude = res.latitude
+      posto.longitude = res.longitude
+    })
+  }
+
+  remover(posto: Posto) {
+
+    const callback = (posto: Posto) => {
+      this._api.delete<Posto>(`posto/${posto.id}`).subscribe(res => {
+        let ind = this.postos.indexOf(posto);
+        this.postos.splice(ind, 1);
+        this.matTable.renderRows();
+      })
+    }
+
+    this._dialog.open<ModalConfirmacaoComponent, any, boolean>(ModalConfirmacaoComponent, {
       data: {
         titulo: 'Atenção!',
         mensagem: 'Voce tem certeza que deseja Excluir este registro'
       }
+    }).afterClosed()
+    .subscribe(res => {
+      if(!res) return;
+      callback(posto)
     })
   }
 
@@ -54,10 +71,12 @@ export class CadastroPostoComponent implements OnInit {
   }
 
   adicionar(){
-    let posto : Posto  = {id: null, nome: null, lat: -20.46477167905963, lng: -54.61623430252075};
-    this._dialog.open(PostoModalComponent, {
-      data: posto,
-      ...MODAL_MD
+    this._dialog.open<PostoModalComponent, Posto, Posto>(PostoModalComponent, { ...MODAL_MD})
+    .afterClosed()
+    .subscribe(res => {
+      if(!res) return;
+      this.postos.push(res);
+      this.matTable.renderRows();
     })
   }
 }

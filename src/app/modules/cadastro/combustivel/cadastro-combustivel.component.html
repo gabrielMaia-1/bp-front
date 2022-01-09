@@ -1,45 +1,55 @@
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8 w-100">
+<div class="row mb-2">
+  <div class="col"></div>
+  <div class="col-auto">
+    <button mat-flat-button color="primary" (click)="adicionar()">Adicionar</button>
+  </div>
+</div>
+<div class="row">
+  <div class="col">
+    <table mat-table [dataSource]="combustiveis" class="mat-elevation-z8 w-100">
 
-    <!-- Id -->
-    <ng-container matColumnDef="id">
-      <th mat-header-cell *matHeaderCellDef> Id. </th>
-      <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-    </ng-container>
-  
-    <!-- Id Posto -->
-    <ng-container matColumnDef="posto-id">
-      <th mat-header-cell *matHeaderCellDef> Id. Posto </th>
-      <td mat-cell *matCellDef="let element"> {{element.idPosto}} </td>
-    </ng-container>
-  
-    <!-- Nome -->
-    <ng-container matColumnDef="nome">
-      <th mat-header-cell *matHeaderCellDef> Nome </th>
-      <td mat-cell *matCellDef="let element"> {{element.nome}} </td>
-    </ng-container>
+        <!-- Id -->
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef> Id. </th>
+          <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+        </ng-container>
+      
+        <!-- Posto -->
+        <ng-container matColumnDef="posto">
+          <th mat-header-cell *matHeaderCellDef> Posto </th>
+          <td mat-cell *matCellDef="let element"> {{element.posto.nome}} </td>
+        </ng-container>
+      
+        <!-- Tipo -->
+        <ng-container matColumnDef="tipo">
+          <th mat-header-cell *matHeaderCellDef> Tipo </th>
+          <td mat-cell *matCellDef="let element"> {{element.tipo.nome}} </td>
+        </ng-container>
 
-    <!-- Preco -->
-    <ng-container matColumnDef="preco">
-      <th mat-header-cell *matHeaderCellDef> Preco / Litro </th>
-      <td mat-cell *matCellDef="let element"> {{element.preco | currency}} </td>
-    </ng-container>
+        <!-- Preco -->
+        <ng-container matColumnDef="preco">
+          <th mat-header-cell *matHeaderCellDef> Preco / Litro </th>
+          <td mat-cell *matCellDef="let element"> {{element.preco | currency}} </td>
+        </ng-container>
 
-    <!-- Action -->
-    <ng-container matColumnDef="action">
-        <th mat-header-cell *matHeaderCellDef> Ação </th>
-        <td mat-cell *matCellDef="let element">
-            <button mat-icon-button (click)="editar(element)">
-                <mat-icon>edit</mat-icon>
-            </button>
-            <button mat-icon-button (click)="remover(element.id)">
-                <mat-icon>delete</mat-icon>
-            </button>
-            <button mat-icon-button>
-                <mat-icon>visibility</mat-icon>
-            </button>
-        </td>
-    </ng-container>
-  
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
+        <!-- Action -->
+        <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef> Ação </th>
+            <td mat-cell *matCellDef="let element">
+                <button mat-icon-button (click)="editar(element)">
+                    <mat-icon>edit</mat-icon>
+                </button>
+                <button mat-icon-button (click)="remover(element)">
+                    <mat-icon>delete</mat-icon>
+                </button>
+                <button mat-icon-button>
+                    <mat-icon>visibility</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+      
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+  </div>
+</div>
