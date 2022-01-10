@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatTable } from '@angular/material/table';
 import { ApiService } from 'src/app/core/api.service';
 import { ModalConfirmacaoComponent } from 'src/app/shared/components/modal-confirmacao/modal-confirmacao.component';
-import { MODAL_LG, MODAL_MD } from 'src/app/shared/consts';
+import { MODAL_LG, MODAL_MD, ROUTE_POSTO } from 'src/app/shared/consts';
 import { PostoDetalhesComponent } from './posto-detalhes/posto-detalhes.component';
 import { PostoModalComponent } from './posto-modal/posto-modal.component';
 import { Posto } from 'src/app/shared/interfaces/Posto'
@@ -22,7 +22,7 @@ export class CadastroPostoComponent implements OnInit {
               public _api: ApiService) { }
 
   ngOnInit(): void {
-    this._api.get<Posto[]>('posto').subscribe(res => {
+    this._api.get<Posto[]>(ROUTE_POSTO).subscribe(res => {
       this.postos = res;
     })
   }
@@ -44,7 +44,7 @@ export class CadastroPostoComponent implements OnInit {
   remover(posto: Posto) {
 
     const callback = (posto: Posto) => {
-      this._api.delete<Posto>(`posto/${posto.id}`).subscribe(res => {
+      this._api.delete<Posto>(`${ROUTE_POSTO}/${posto.id}`).subscribe(res => {
         let ind = this.postos.indexOf(posto);
         this.postos.splice(ind, 1);
         this.matTable.renderRows();

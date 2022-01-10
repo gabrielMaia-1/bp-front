@@ -1,0 +1,31 @@
+<h2 mat-dialog-title>Tipo Combustivel</h2>
+<mat-dialog-content>
+    <form #f="ngForm">
+        <div class="row">
+            <!-- Id -->
+            <div class="col-md-2">
+                <mat-form-field appearance="fill" class="w-100">
+                    <mat-label>Id.</mat-label>
+                    <input matInput disabled name="id" [ngModel]="data.id">
+                </mat-form-field>
+            </div>
+
+            <!-- Nome -->
+            <div class="col-sm-7">
+                <mat-form-field appearance="fill" class="w-100">
+                    <mat-label>Tipo Combustivel</mat-label>
+                    <input matInput type="text" name="nome" [ngModel]="data.nome" required>
+                </mat-form-field>
+            </div>
+
+            <!-- Aditivado -->
+            <div class="col-sm-3">
+                <mat-checkbox class="p-3" matInput name="aditivado" [ngModel]="data.aditivado">Aditivado</mat-checkbox>
+            </div>
+        </div>
+    </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-flat-button color="primary" (click)="salvar(f.form)">Salvar</button>
+    <button mat-flat-button [mat-dialog-close]="false">Cancelar</button>
+</mat-dialog-actions>

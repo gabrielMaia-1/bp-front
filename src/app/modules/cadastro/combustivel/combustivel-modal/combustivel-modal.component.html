@@ -5,29 +5,39 @@
             <div class="col-md-2">
                 <mat-form-field appearance="fill" class="w-100">
                     <mat-label>Id.</mat-label>
-                    <input matInput disabled [value]="data.id" name="id" ngModel>
+                    <input matInput disabled [ngModel]="data.id" name="id" >
                 </mat-form-field>
             </div>
             <div class="col-md-4">
                 <mat-form-field appearance="fill" class="w-100">
                     <mat-label>Posto</mat-label>
-                    <mat-select required name="posto" ngModel [value]="data.id">
-                        <mat-option *ngFor="let posto of postos | async" [value]="posto">{{posto.nome}}</mat-option>
+                    <mat-select required name="posto" [ngModel]="data.posto">
+                        <ng-container *ngIf="postos | async as postoObs; else loadingPostos">
+                            <mat-option *ngFor="let posto of postoObs" [value]="posto">{{posto.nome}}</mat-option>
+                        </ng-container>
+                        <ng-template #loadingPostos>
+                            <mat-option [value]="data.posto" disabled> Carregando...</mat-option>
+                        </ng-template>
                     </mat-select>
                 </mat-form-field>
             </div>
             <div class="col-md-4">
                 <mat-form-field appearance="fill" class="w-100">
                     <mat-label>Tipo Combustivel</mat-label>
-                    <mat-select required name="tipo" ngModel>
-                        <mat-option *ngFor="let tipo of tipos | async" [value]="tipo">{{tipo.nome}}</mat-option>
+                    <mat-select required name="tipo" [ngModel]="data.tipo">
+                        <ng-container *ngIf="tipos | async as tiposObs; else loadingTipos">
+                            <mat-option *ngFor="let tipo of tiposObs" [value]="tipo">{{tipo.nome}}</mat-option>
+                        </ng-container>
+                        <ng-template #loadingTipos>
+                            <mat-option [value]="data.tipo" > Carregando...</mat-option>
+                        </ng-template>
                     </mat-select>
                 </mat-form-field>
             </div>
             <div class="col-md-2">
                 <mat-form-field appearance="fill" class="w-100">
                     <mat-label>Preço / Litro</mat-label>
-                    <input matInput type="number" [value]="data.preco" name="preco" ngModel required min="0">
+                    <input matInput type="number" [ngModel]="data.preco" name="preco" required min="0">
                     <mat-error *ngIf="f.form.controls['preco']?.hasError('min')">
                         Preço do combustivel não pode ser negativo
                     </mat-error>

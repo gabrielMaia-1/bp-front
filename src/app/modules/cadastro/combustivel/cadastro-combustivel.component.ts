@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatTable } from '@angular/material/table';
 import { ApiService } from 'src/app/core/api.service';
 import { ModalConfirmacaoComponent } from 'src/app/shared/components/modal-confirmacao/modal-confirmacao.component';
-import { MODAL_MD } from 'src/app/shared/consts';
+import { MODAL_MD, ROUTE_COMBUSTIVEL } from 'src/app/shared/consts';
 import { Combustivel } from 'src/app/shared/interfaces/Combustivel';
 import { CombustivelModalComponent } from './combustivel-modal/combustivel-modal.component';
 
@@ -16,19 +16,15 @@ export class CadastroCombustivelComponent implements OnInit {
 
   @ViewChild(MatTable) matTable!: MatTable<Combustivel>;
   displayedColumns: string[] = ['id', 'posto', 'tipo', 'preco', 'action']
-  combustiveis: Combustivel[] = [
-    {
-      id: 1,
-      posto: {id: 1, nome: 'Santa Gazosa', latitude: 12, longitude: 12},
-      tipo: {id: 1 ,nome: 'Gasolina', aditivado: false},
-      preco: 5.2
-    }
-  ];
+  combustiveis: Combustivel[] = [ ];
 
   constructor(public _dialog: MatDialog,
               public _api: ApiService) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this._api.get<Combustivel[]>(ROUTE_COMBUSTIVEL)
+    .subscribe(res => this.combustiveis = res);
+  }
 
   editar(combustivel: Combustivel){
     this._dialog.open<CombustivelModalComponent, Combustivel, Combustivel>(CombustivelModalComponent, {
@@ -55,7 +51,7 @@ export class CadastroCombustivelComponent implements OnInit {
 
   remover(combustivel: Combustivel){
     const callback = (comb: Combustivel) => {
-      this._api.delete<Combustivel>(`combustivel/${comb.id}`).subscribe(res => {
+      this._api.delete<Combustivel>(`${ROUTE_COMBUSTIVEL}/${comb.id}`).subscribe(res => {
         let ind = this.combustiveis.indexOf(comb);
         this.combustiveis.splice(ind, 1);
         this.matTable.renderRows();

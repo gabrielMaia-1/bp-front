@@ -2,7 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ApiService } from 'src/app/core/api.service';
-import { DEFAULT_INSERT_COMBUSTIVEL } from 'src/app/shared/consts';
+import { DEFAULT_INSERT_COMBUSTIVEL, ROUTE_COMBUSTIVEL, ROUTE_POSTO, ROUTE_TIPO_COMBUSTIVEL } from 'src/app/shared/consts';
 import { Combustivel } from 'src/app/shared/interfaces/Combustivel';
 import { Posto } from 'src/app/shared/interfaces/Posto';
 import { TipoCombustivel } from 'src/app/shared/interfaces/TipoCombustivel';
@@ -15,8 +15,8 @@ import { TipoCombustivel } from 'src/app/shared/interfaces/TipoCombustivel';
 export class CombustivelModalComponent implements OnInit {
 
   insert: boolean;
-  postos = this._api.get<Posto[]>('posto');
-  tipos = this._api.get<TipoCombustivel[]>('tipo-combustivel');
+  postos = this._api.get<Posto[]>(ROUTE_POSTO);
+  tipos = this._api.get<TipoCombustivel[]>(ROUTE_TIPO_COMBUSTIVEL);
 
   constructor(public _dialogRef: MatDialogRef<CombustivelModalComponent>,
               @Inject(MAT_DIALOG_DATA) public data: Combustivel,
@@ -33,7 +33,7 @@ export class CombustivelModalComponent implements OnInit {
     if(!form.valid) return;
 
     const method = this.insert ? this._api.post : this._api.put;
-    const route = this.insert ? 'combustivel' : `combustivel/${this.data.id}`
+    const route = this.insert ? ROUTE_COMBUSTIVEL : `${ROUTE_COMBUSTIVEL}/${this.data.id}`
 
     method.call(this._api, route, form.getRawValue())
     .subscribe(res => this._dialogRef.close(res));

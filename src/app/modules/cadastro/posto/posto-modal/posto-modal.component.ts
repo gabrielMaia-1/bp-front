@@ -2,7 +2,7 @@ import { AfterViewInit, Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ApiService } from 'src/app/core/api.service';
-import { DEFAULT_INSERT_POSTO } from 'src/app/shared/consts';
+import { DEFAULT_INSERT_POSTO, ROUTE_POSTO } from 'src/app/shared/consts';
 import { Posto } from 'src/app/shared/interfaces/Posto';
 
 declare let L : any;
@@ -76,7 +76,7 @@ export class PostoModalComponent implements OnInit, AfterViewInit {
     if(!this.postoForm.valid) return;
 
     const method = this.insert ? this._api.post : this._api.put;
-    const route = this.insert ? 'posto' : `posto/${this.data.id}`
+    const route = this.insert ? ROUTE_POSTO : `${ROUTE_POSTO}/${this.data.id}`
 
     method.call(this._api, route, this.postoForm.getRawValue())
     .subscribe(res => this._dialogRef.close(res));
