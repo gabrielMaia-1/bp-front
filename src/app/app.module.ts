@@ -8,10 +8,12 @@ import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core/core.module';
 import { MaterialModule } from './shared/material/material.module';
 import { HttpClientModule } from '@angular/common/http';
+import { HomeComponent } from './modules/home/home.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
